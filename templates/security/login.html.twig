@@ -10,6 +10,7 @@
     <input id="email" name="_username" type="email" required value="{{ last_username }}">
     <label for="password">Password</label>
     <input id="password" name="_password" type="password" required>
+    <input type="hidden" name="_token" value="{{ csrf_token('authenticate') }}">
     <button type="submit">Sign in</button>
   </form>
 {% endblock %}
