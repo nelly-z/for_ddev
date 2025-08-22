@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% block title %}Feedback{% endblock %}
+{% block body %}
+  <h1>Feedback</h1>
+  {{ form_start(form) }}
+    {{ form_row(form.dateVisited) }}
+    {{ form_row(form.overallRating) }}
+    {{ form_row(form.comments) }}
+    {{ form_row(form.extraFeedback) }}
+    <button type="submit">Submit feedback</button>
+  {{ form_end(form) }}
+{% endblock %}

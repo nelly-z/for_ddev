@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Student App{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{{ asset('styles.css') }}">
+</head>
+<body>
+<header>
+  <nav>
+    <a href="{{ path('app_home') }}">Home</a>
+    {% if app.user %}
+      <a href="{{ path('app_feedback') }}">Leave Feedback</a>
+      <a href="{{ path('app_logout') }}">Logout</a>
+      <span>Hi, {{ app.user.firstname }}</span>
+    {% else %}
+      <a href="{{ path('app_register') }}">Register</a>
+      <a href="{{ path('app_login') }}">Login</a>
+    {% endif %}
+  </nav>
+</header>
+
+<main>
+  {% block body %}{% endblock %}
+</main>
+
+<footer><small>&copy; {{ "now"|date("Y") }}</small></footer>
+</body>
+</html>
