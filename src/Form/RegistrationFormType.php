@@ -31,5 +31,12 @@ class RegistrationFormType extends AbstractType
           ->add('preferredDate', DateTimeType::class, ['widget'=>'single_text', 'required'=>false]);
     }
 
-    public function configureOptions(OptionsResolver $resolver){ $resolver->setDefaults(['data_class'=>User::class]); }
+    public function configureOptions(OptionsResolver $resolver){ 
+        $resolver->setDefaults([
+            'data_class'=>User::class,
+            'csrf_protection' => true,
+            'csrf_field_name' => '_token',
+            'csrf_token_id' => 'registration_form'
+        ]); 
+    }
 }

@@ -19,5 +19,12 @@ class FeedbackFormType extends AbstractType
           ->add('comments', TextareaType::class, ['required'=>false])
           ->add('extraFeedback', TextareaType::class, ['required'=>false]);
     }
-    public function configureOptions(OptionsResolver $r){ $r->setDefaults(['data_class'=>Feedback::class]); }
+    public function configureOptions(OptionsResolver $r){ 
+        $r->setDefaults([
+            'data_class'=>Feedback::class,
+            'csrf_protection' => true,
+            'csrf_field_name' => '_token',
+            'csrf_token_id' => 'feedback_form'
+        ]); 
+    }
 }
