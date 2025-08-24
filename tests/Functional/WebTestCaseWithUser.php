@@ -7,21 +7,44 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class WebTestCaseWithUser extends WebTestCase
 {
-    protected function createUserAndLogin($client, string $email='test@example.com', string $pwd='pass1234'): User
+    protected function createUserAndLogin(): \Symfony\Bundle\FrameworkBundle\KernelBrowser
     {
-        $em = static::getContainer()->get('doctrine')->getManager();
-        $hasher = static::getContainer()->get(UserPasswordHasherInterface::class);
+        $client = static::createClient();
+        
+        // Create a test user in database
+        $container = static::getContainer();
+        $entityManager = $container->get('doctrine')->getManager();
+        $passwordHasher = $container->get(UserPasswordHasherInterface::class);
 
-        $u = (new User());
-        $u->setFirstname('Test')->setLastname('User')->setEmail($email)
-          ->setBirthday(new \DateTime('2000-01-01'))
-          ->setPassword($hasher->hashPassword($u, $pwd));
-        $em->persist($u); $em->flush();
+        $email = 'testuser@example.com';
+        $password = 'password123';
 
-        $client->followRedirects();
-        $client->request('GET', '/login');
-        $client->submitForm('Sign in', ['_username'=>$email, '_password'=>$pwd]);
+        // Check if user already exists
+        $userRepository = $entityManager->getRepository(User::class);
+        $user = $userRepository->findOneBy(['email' => $email]);
 
-        return $u;
+        if (!$user) {
+            $user = new User();
+            $user->setEmail($email);
+            $user->setFirstname('Test');
+            $user->setLastname('User');
+            $user->setBirthday(new \DateTime('2000-01-01'));
+            $user->setPassword($passwordHasher->hashPassword($user, $password));
+
+            $entityManager->persist($user);
+            $entityManager->flush();
+        }
+
+        // Login using actual login form
+        $crawler = $client->request('GET', '/login');
+        $form = $crawler->selectButton('Sign in')->form([
+            '_username' => $email,
+            '_password' => $password,
+        ]);
+        
+        $client->submit($form);
+        $client->followRedirect(); // Follow redirect after successful login
+        
+        return $client;
     }
 }
