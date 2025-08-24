@@ -41,6 +41,7 @@ class AppFixtures extends Fixture
         for ($i=0;$i<80;$i++){
             $fb = (new Feedback())
                 ->setUser($faker->randomElement($users))
+                ->setService($faker->randomElement($services))
                 ->setDateVisited($faker->dateTimeBetween('-2 months','now'))
                 ->setOverallRating($faker->numberBetween(1,5))
                 ->setComments($faker->boolean(70)? $faker->paragraph(2): null)
