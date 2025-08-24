@@ -3,7 +3,6 @@
 **Student**: Nelli Zurabyan  
 **Course**: Software Engineering and Web Technology  
 **Academic Year**: 2024-2025  
-**Institution**: KU Leuven, Groep T
 
 **🔗 GitHub Repository**: [https://github.com/nelly-z/for_ddev](https://github.com/nelly-z/for_ddev)
 
@@ -11,7 +10,7 @@
 
 ## Description
 
-A comprehensive web application built with **Symfony 6.4 LTS** framework for managing student service registrations and feedback collection. 
+A comprehensive web application built with **Symfony 6.4 LTS** for managing student service registrations and feedback collection. Students can register for campus support services (career advice, counseling, etc.), provide secure authentication, and submit feedback after receiving services.
 
 ### What This Project Does
 
@@ -24,18 +23,11 @@ This application serves as a **student service management platform** where:
 ### Key Features
 
 - 🔐 **Secure Authentication**: Password hashing, CSRF protection, role-based access
-- 📊 **Database Management**: 60+ users, 10 services, 80+ feedback records via Doctrine ORM
-- ✅ **Quality Assurance**: >75% test coverage with PHPUnit (exceeds 65% requirement)
+- 📊 **Database**: 155 records (63 users + 10 services + 82 feedback) - **3x requirement**
+- ✅ **Quality Assurance**: >75% test coverage with PHPUnit **exceeds 65% requirement**
 - 🎨 **W3C Compliance**: Valid HTML5 and CSS3 following web standards
 - 🐳 **Containerized Development**: DDEV environment for consistent deployment
 
-## Badges
-
-![PHP Version](https://img.shields.io/badge/PHP-8.3-blue)
-![Symfony](https://img.shields.io/badge/Symfony-6.4%20LTS-brightgreen)
-![Test Coverage](https://img.shields.io/badge/Coverage-75.59%25-brightgreen)
-![Database](https://img.shields.io/badge/Database-MySQL%2FMariaDB-orange)
-![Tests](https://img.shields.io/badge/Tests-9%20passed-success)
 
 ## Technical Stack
 
@@ -128,6 +120,31 @@ ddev exec php bin/console cache:clear
 # Run security checks
 ddev composer audit
 ```
+
+### Database Records Verification
+
+To verify the **50+ records requirement** is met, run:
+
+```bash
+# Count all records in database
+ddev exec php bin/console doctrine:query:sql "SELECT 'users' as table_name, COUNT(*) as count FROM users UNION SELECT 'service' as table_name, COUNT(*) as count FROM service UNION SELECT 'feedback' as table_name, COUNT(*) as count FROM feedback"
+```
+
+**Expected Output:**
+```
+ ------------ -------
+  table_name   count
+ ------------ -------
+  users        63
+  service      10
+  feedback     82
+ ------------ -------
+```
+**Total**: **155 records** (3x the 50+ requirement)
+
+**Total Records**: **155** (63 + 10 + 82)
+- **Assignment Requirement**: 50+ records ✅
+- **Achievement**: **155 records** ✅ **(3x requirement)**
 
 ## Project Structure
 
@@ -301,7 +318,7 @@ This project fulfills all university assignment requirements:
 - ✅ **9 Tests** with **40 Assertions** - All Passing
 - ✅ **W3C Compliance** - Valid HTML5 & CSS3
 - ✅ **Security Standards** - CSRF Protection, Password Hashing
-- ✅ **Database Integrity** - 150+ records with proper relationships
+- ✅ **Database Integrity** - 155+ records with proper relationships (63 users + 10 services + 82 feedback) 
 - ✅ **Git Workflow** - Feature branches, atomic commits, main branch merges
 
 👉 **Detailed Analysis**: [`COVERAGE_REPORT.md`](COVERAGE_REPORT.md)  
@@ -379,7 +396,7 @@ This project is developed for **educational purposes** as part of university pro
 **Assignment Requirements Status:**
 - ✅ **W3C Compliant HTML/CSS**
 - ✅ **Symfony Framework with Twig** 
-- ✅ **Doctrine ORM with 50+ Records**
+- ✅ **Doctrine ORM with 50+ Records (155 achieved)**
 - ✅ **Test Coverage >65% (75.59% achieved)**
 - ✅ **Git Version Control with Atomic Commits**
 - ✅ **Complete Registration & Feedback System**
