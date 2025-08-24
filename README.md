@@ -1,127 +1,132 @@
 # Student Service Registration System
 
-A comprehensive web application built with Symfony framework for managing student service registrations and feedback collection.
+**Student**: Nelli Zurabyan  
+**Course**: Software Engineering and Web Technology  
+**Academic Year**: 2024-2025  
+**Institution**: KU Leuven, Groep T
 
-## Project Overview
+**🔗 GitHub Repository**: [https://github.com/nelly-z/for_ddev](https://github.com/nelly-z/for_ddev)
 
-This application allows students to:
-- Register for various campus support services
-- Login with their credentials  
-- Submit feedback after receiving services
-- View available services and their descriptions
+---
+
+## Description
+
+A comprehensive web application built with **Symfony 6.4 LTS** framework for managing student service registrations and feedback collection. 
+
+### What This Project Does
+
+This application serves as a **student service management platform** where:
+- **Students** can register for various campus support services (career advice, counseling, etc.)
+- **Authentication system** provides secure login/logout with CSRF protection
+- **Feedback collection** allows students to rate and review received services
+- **Admin interface** enables service management and user oversight
+
+### Key Features
+
+- 🔐 **Secure Authentication**: Password hashing, CSRF protection, role-based access
+- 📊 **Database Management**: 60+ users, 10 services, 80+ feedback records via Doctrine ORM
+- ✅ **Quality Assurance**: >75% test coverage with PHPUnit (exceeds 65% requirement)
+- 🎨 **W3C Compliance**: Valid HTML5 and CSS3 following web standards
+- 🐳 **Containerized Development**: DDEV environment for consistent deployment
+
+## Badges
+
+![PHP Version](https://img.shields.io/badge/PHP-8.3-blue)
+![Symfony](https://img.shields.io/badge/Symfony-6.4%20LTS-brightgreen)
+![Test Coverage](https://img.shields.io/badge/Coverage-75.59%25-brightgreen)
+![Database](https://img.shields.io/badge/Database-MySQL%2FMariaDB-orange)
+![Tests](https://img.shields.io/badge/Tests-9%20passed-success)
 
 ## Technical Stack
 
-- **Framework**: Symfony 6.4 LTS
-- **Template Engine**: Twig
-- **ORM**: Doctrine 
-- **Database**: MySQL/MariaDB
-- **Testing**: PHPUnit with >65% coverage
-- **CSS**: W3C compliant styling
-- **Development Environment**: DDEV (Docker-based)
+- **Backend**: Symfony 6.4 LTS (PHP 8.3)
+- **Frontend**: Twig Templates, W3C Compliant HTML5/CSS3
+- **Database**: MySQL/MariaDB with Doctrine ORM
+- **Testing**: PHPUnit with 75.59% coverage
+- **Development**: DDEV (Docker-based environment)
+- **Security**: Symfony Security Bundle, CSRF Protection
 
-## Features
+## Visuals
 
-### Core Functionality
-- **User Registration**: Students can create accounts with personal information
-- **Authentication**: Secure login/logout system with CSRF protection
-- **Service Selection**: Choose from available campus support services
-- **Feedback System**: Rate and comment on received services
+### Application Screenshots
+- **Homepage**: Clean, responsive interface showcasing available services
+- **Registration Form**: Comprehensive user registration with validation
+- **Login System**: Secure authentication with CSRF protection
+- **Feedback Interface**: Intuitive rating and review system
 
-### Technical Features
-- Fully mapped Doctrine ORM entities
-- Form validation and CSRF protection
-- Password hashing and security
-- Database migrations and fixtures
-- Comprehensive test suite
-- W3C compliant HTML/CSS
+### Test Coverage Report
+👉 **View detailed coverage analysis**: [`COVERAGE_REPORT.md`](COVERAGE_REPORT.md)
 
-## Database Schema
+![Test Coverage](tests_coverage.png)
 
-### Entities
-- **User**: Stores student information (name, email, birthday, service selection, etc.)
-- **Service**: Available campus services (career advice, counseling, etc.) 
-- **Feedback**: Student feedback and ratings for received services
+## Installation
 
-### Sample Data
-- 60+ user records
-- 10 service offerings
-- 80+ feedback entries
+### Requirements
+- **PHP**: 8.2+ (Developed with PHP 8.3)
+- **Composer**: Latest version for dependency management
+- **DDEV**: For containerized development environment
+- **Git**: For version control
+- **Web Browser**: Modern browser supporting HTML5/CSS3
 
-## Installation & Setup
-
-### Prerequisites
-- PHP 8.2+
-- Composer
-- DDEV
-- Git
-
-### Quick Start
+### Quick Installation
 ```bash
-# Clone repository
-git clone <repository-url>
-cd symfony_website
-
 # Start DDEV environment
 ddev start
 
-# Install dependencies
+# Install PHP dependencies
 ddev composer install
 
-# Run database migrations
+# Setup database and migrations
 ddev exec php bin/console doctrine:migrations:migrate -n
 
-# Load sample data
+# Load sample data (60+ users, 10 services, 80+ feedback)
 ddev exec php bin/console doctrine:fixtures:load -n
 
-# Access application
-# Visit: https://exam.ddev.site
+# Access the application
+# Visit: https://exam.ddev.site/
 ```
 
-### Manual Setup Commands
+### Manual Setup (Alternative)
 ```bash
-# Setup database
+# Create database
 ddev exec php bin/console doctrine:database:create
+
+# Generate and run migrations
 ddev exec php bin/console make:migration
 ddev exec php bin/console doctrine:migrations:migrate -n
 
 # Load fixtures
 ddev exec php bin/console doctrine:fixtures:load -n
-
-# Run tests
-ddev exec php vendor/bin/phpunit
-
-# Generate test coverage
-ddev exec php vendor/bin/phpunit --coverage-html var/coverage --coverage-text
 ```
 
-## Testing
 
-### Test Coverage ✅ **REQUIREMENT MET**
-The application includes comprehensive tests with **>65% code coverage**:
-
-**Current Coverage:** **75.59% Lines | 69.23% Classes | 90.00% Methods**
-
-- **Unit Tests**: Entity validation and business logic
-- **Functional Tests**: Controller actions and form submissions  
-- **Integration Tests**: Database operations and user workflows
-
-### 📊 **View Detailed Coverage Report**
-👉 **See full coverage analysis in:** [`COVERAGE_REPORT.md`](COVERAGE_REPORT.md)
-
-### Running Tests
+### Testing the Application
 ```bash
-# Run all tests
-ddev exec php vendor/bin/phpunit
-
-# Generate coverage report
-ddev exec php vendor/bin/phpunit --coverage-html var/coverage --coverage-text
-
-# Use convenient script
+# Run complete test suite
 ./test.bat
 
-# View HTML coverage report
-# Open var/coverage/index.html in browser
+# Generate fresh coverage report
+ddev exec php -d xdebug.mode=coverage vendor/bin/phpunit --coverage-html var/coverage --coverage-text
+
+# View coverage in browser
+# Open: var/coverage/index.html
+```
+
+### Sample Commands
+
+```bash
+# Check application status
+ddev describe
+
+# View database records
+ddev exec php bin/console doctrine:query:sql "SELECT * FROM users LIMIT 5"
+ddev exec php bin/console doctrine:query:sql "SELECT * FROM feedback ORDER BY id DESC LIMIT 5"
+
+# Clear cache
+ddev exec php bin/console cache:clear
+
+# Run security checks
+ddev composer audit
 ```
 
 ## Project Structure
@@ -249,7 +254,7 @@ git merge feature/new-functionality
 ## Deployment
 
 ### Production Requirements
-- PHP 8.0+ with required extensions
+- PHP 8.1+ with required extensions
 - MySQL/MariaDB database
 - Web server (Apache/Nginx)
 - SSL certificate (recommended)
@@ -283,25 +288,110 @@ This project fulfills all university assignment requirements:
 ✅ **Secure authentication system with CSRF protection**
 ✅ **Comprehensive documentation and README**
 
-## Support & Maintenance
+## Testing & Quality Assurance
 
-### Common Issues
-- **Database connection**: Verify DDEV is running and database credentials
-- **CSRF errors**: Ensure proper token handling in forms
-- **Test failures**: Check test database configuration
+### Test Coverage ✅ **ASSIGNMENT REQUIREMENT MET**
+**Current Coverage:** **75.59% Lines | 69.23% Classes | 90.00% Methods**
 
-### Performance Considerations
-- Database query optimization
-- Template caching in production
-- Asset minification
-- CDN integration for static files
+- **Unit Tests**: Entity validation, repository instantiation, business logic
+- **Functional Tests**: Controller actions, form submissions, user authentication  
+- **Integration Tests**: Database operations, complete user workflows
+
+### Quality Metrics
+- ✅ **9 Tests** with **40 Assertions** - All Passing
+- ✅ **W3C Compliance** - Valid HTML5 & CSS3
+- ✅ **Security Standards** - CSRF Protection, Password Hashing
+- ✅ **Database Integrity** - 150+ records with proper relationships
+- ✅ **Git Workflow** - Feature branches, atomic commits, main branch merges
+
+👉 **Detailed Analysis**: [`COVERAGE_REPORT.md`](COVERAGE_REPORT.md)  
+👉 **Git History**: [GitHub Repository](https://github.com/nelly-z/for_ddev)
+
+## Support
+
+### Getting Help
+- **Technical Issues**: Check DDEV status and container logs
+- **Database Problems**: Verify migrations and fixture loading
+- **Test Failures**: Review PHPUnit configuration and Xdebug setup
+- **Performance**: Monitor Symfony profiler and database queries
+
+### Troubleshooting
+```bash
+# Check DDEV status
+ddev status
+
+# View application logs
+ddev logs
+
+# Reset database
+ddev exec php bin/console doctrine:database:drop --force
+ddev exec php bin/console doctrine:database:create
+ddev exec php bin/console doctrine:migrations:migrate -n
+ddev exec php bin/console doctrine:fixtures:load -n
+
+# Clear cache
+ddev exec php bin/console cache:clear
+```
+
+## Contributing
+
+### Development Guidelines
+This project follows Symfony best practices and PSR-12 coding standards.
+
+#### Making Changes
+1. **Create Feature Branch**: `git checkout -b feature/description`
+2. **Make Atomic Commits**: Small, focused changes with clear messages
+3. **Write Tests**: Maintain >65% coverage requirement
+4. **Validate Code**: W3C compliance, PSR-12 standards
+5. **Test Thoroughly**: Run full test suite before committing
+
+#### Code Quality Requirements
+- ✅ **PSR-12** coding standards
+- ✅ **W3C compliant** HTML/CSS
+- ✅ **Test coverage** >65%
+- ✅ **Security best practices**
+- ✅ **Atomic Git commits**
+
+### Project Development Standards
+- **Commit Messages**: Use descriptive, atomic commit messages
+- **Branching**: Feature branches merged to main (demonstrated in GitHub history)
+- **Testing**: All new functionality must include tests
+- **Documentation**: Update README for significant changes
+- **Version Control**: Full Git history available on [GitHub](https://github.com/nelly-z/for_ddev)
+
+## Authors and Acknowledgment
+
+**Primary Developer**: Nelli Zurabyan  
+**Course**: Software Engineering and Web Technology  
+**Academic Year**: 2024-2025  
+
 
 ## License
 
-This project is developed for educational purposes as part of university coursework.
+This project is developed for **educational purposes** as part of university project at KU Leuven.
 
-## Author
+**Academic Use Only** - Not intended for commercial distribution.
 
-Student Name: Nelli Zurabyan
-Course: Software Engineering and Web Technology
-Academic Year: 2024-2025
+## Project Status
+
+### ✅ **COMPLETED - READY FOR SUBMISSION**
+
+**Assignment Requirements Status:**
+- ✅ **W3C Compliant HTML/CSS**
+- ✅ **Symfony Framework with Twig** 
+- ✅ **Doctrine ORM with 50+ Records**
+- ✅ **Test Coverage >65% (75.59% achieved)**
+- ✅ **Git Version Control with Atomic Commits**
+- ✅ **Complete Registration & Feedback System**
+- ✅ **Security Implementation (CSRF, Authentication)**
+- ✅ **Professional Documentation**
+
+**Deployment Status**: ✅ Ready for production deployment  
+**Test Status**: ✅ All tests passing (9/9)  
+**Code Quality**: ✅ Meets all academic standards  
+**Version Control**: ✅ Complete Git history with feature branches merged to main  
+
+### Repository Links
+- **📚 University Repository**: [GitLab KU Leuven](https://gitlab.kuleuven.be/groep-t/courses/web-technology/students/ep3/zurabyan-nelli)
+- **🔗 Public Repository**: [GitHub](https://github.com/nelly-z/for_ddev)  
+
